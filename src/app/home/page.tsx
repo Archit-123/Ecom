@@ -4,10 +4,18 @@ import { useSelector } from "react-redux";
 import style from "./Home.module.css";
 import { useDispatch } from "react-redux";
 import { productsRedux } from "../action";
+import type { AppDispatch, RootState } from "../store/Sore";
 
-export default function page() {
-  const dispatch: any = useDispatch();
-  const userInput = useSelector((state: any) => state.user.userInput);
+export default function Page() {
+  type Product = {
+    _id: string;
+    price: number;
+    productName: string;
+    image: string;
+    category: string;
+  };
+  const dispatch = useDispatch<AppDispatch>();
+  const userInput = useSelector((state: RootState) => state.user.userInput);
 
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -28,12 +36,12 @@ export default function page() {
       }
     };
     fetchData();
-  }, []);
+  });
   console.log(products);
 
   useEffect(() => {
     setFilteredProducts(
-      products.filter((product: any) =>
+      products.filter((product: Product) =>
         product.productName.toLowerCase().includes(userInput.toLowerCase())
       )
     );
@@ -65,7 +73,7 @@ export default function page() {
         )}
         <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
           {flagProduct &&
-            filteredProducts.map((pdt: any, index) => {
+            filteredProducts.map((pdt: Product, index) => {
               return (
                 <div
                   key={index}
@@ -232,7 +240,7 @@ export default function page() {
                       </div>
 
                       <p className="text-sm font-medium text-gray-900 dark:text-white">
-                        {pdt?.rating}
+                        223
                       </p>
                       <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                         (4,263)
@@ -319,7 +327,7 @@ export default function page() {
             })}
 
           {!flagProduct &&
-            products.map((pdt: any) => {
+            products.map((pdt: Product) => {
               return (
                 <div
                   key={pdt._id}
@@ -486,7 +494,7 @@ export default function page() {
                       </div>
 
                       <p className="text-sm font-medium text-gray-900 dark:text-white">
-                        {pdt?.rating}
+                        {/* {pdt?.rating} */}
                       </p>
                       <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                         (4,263)

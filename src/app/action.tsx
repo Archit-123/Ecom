@@ -2,6 +2,7 @@
 
 type Product = {
   _id: string;
+  price: number;
   productName: string;
   image: string;
   category: string;

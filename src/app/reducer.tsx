@@ -1,17 +1,20 @@
 "use client";
-const initialState = {
-  userInput: "",
-  pdts: "",
-};
+
 type State = {
   userInput: string;
   pdts: string;
 };
+
 type Action =
   | { type: "user_input"; payload: string }
   | { type: "products"; payload: string };
 
-const userReducer = (state: State = initialState, action: Action) => {
+const initialState: State = {
+  userInput: "",
+  pdts: "",
+};
+
+const userReducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case "user_input":
       return {

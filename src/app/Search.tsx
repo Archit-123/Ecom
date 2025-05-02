@@ -2,16 +2,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserinput } from "./action";
+import type { AppDispatch } from "./store/Sore";
 
 export default function Search() {
   const [input, setInput] = useState("");
-  const [names, setNames] = useState("");
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const HandleSubmit = (e: any) => {
+  const HandleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(setUserinput(input));
-    setNames(input);
     setInput("");
   };
 

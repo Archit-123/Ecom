@@ -12,7 +12,7 @@ interface MongooseGlobal {
 }
 
 declare global {
-  var mongoose: MongooseGlobal | undefined;
+  let mongoose: MongooseGlobal | undefined;
 }
 
 const globalWithMongoose = global as typeof globalThis & {

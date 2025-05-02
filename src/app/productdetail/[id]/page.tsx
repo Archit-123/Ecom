@@ -1,17 +1,25 @@
 import { notFound } from "next/navigation";
 import connectDB from "../../lib/mongoose";
-import Product from "../../models/product";
+import ProductModel from "../../models/product";
 
 interface Props {
   params: { id: string };
 }
-
+type Product = {
+  _id: string;
+  price: number;
+  productName: string;
+  image: string;
+  category: string;
+};
 export default async function ProductPage({ params }: Props) {
   await connectDB();
 
-  const product: any = await Product.findById(params.id).lean();
+  const productData = await ProductModel.findById(params.id).lean();
 
-  if (!product) return notFound();
+  if (!productData) return notFound();
+
+  const product = productData as unknown as Product;
 
   return (
     <div>

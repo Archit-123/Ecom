@@ -5,6 +5,13 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function ProductPreferences() {
+  type Product = {
+    _id: string;
+    price: number;
+    productName: string;
+    image: string;
+    category: string;
+  };
   // Get the id from url
   const searchParam = useSearchParams();
   const id = searchParam.get("id");
@@ -341,7 +348,7 @@ export default function ProductPreferences() {
             </tr>
           </thead>
           <tbody>
-            {products.map((pdt: any) => {
+            {products.map((pdt: Product) => {
               return (
                 <tr
                   key={pdt._id}
