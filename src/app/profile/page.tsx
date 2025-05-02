@@ -4,14 +4,7 @@ import { useAuthStore } from "../store/authStore";
 import { signOut } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import { useRouter } from "next/navigation";
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Avatar, Button, Container, Paper, Typography } from "@mui/material";
 
 export default function ProfilePage() {
   const user = useAuthStore((state) => state.user);

@@ -12,7 +12,6 @@ export default function ProductPreferences() {
 
   const [flagmodal, setFlagmodal] = useState(false);
   const [fileInput, setFileInput] = useState<File | null>(null);
-  const [flasgmodal2, setFlagModal2] = useState(false);
 
   const HandlemodalToggle = () => {
     setFlagmodal(!flagmodal);
@@ -37,7 +36,7 @@ export default function ProductPreferences() {
         const data = await res.json();
         setProducts(data);
       } catch (err) {
-        console.error("❌ Failed to fetch products:", err);
+        console.error("Failed to fetch products:", err);
       }
     };
     fetchData();
@@ -144,7 +143,7 @@ export default function ProductPreferences() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Add new product</h1>
-      <h1 className={`${style.bgforModal} mb-4`}>advsdvgw</h1>
+
       <p>Manage your profile info, language, and display preferences.</p>
       <button
         onClick={HandlemodalToggle}
