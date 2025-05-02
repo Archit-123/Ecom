@@ -3,8 +3,15 @@ const initialState = {
   userInput: "",
   pdts: "",
 };
+type State = {
+  userInput: string;
+  pdts: string;
+};
+type Action =
+  | { type: "user_input"; payload: string }
+  | { type: "products"; payload: string };
 
-const userReducer = (state = initialState, action: any) => {
+const userReducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
     case "user_input":
       return {
