@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server";
 import connectDB from "../../../lib/mongoose";
-import Product from "../../../models/product";
+import ProductModel from "../../../models/product";
 
 export const config = {
   api: {
     bodyParser: false,
   },
 };
-
+// GET 
 export async function GET() {
   try {
     await connectDB();
-    const products = await Product.find();
+    const products = await ProductModel.find();
     return NextResponse.json(products);
   } catch (error) {
-    console.error("❌ GET error:", error);
+    console.error(" GET error:", error);
     return new NextResponse(
       JSON.stringify({ error: "Failed to fetch products" }),
       {
@@ -25,6 +25,8 @@ export async function GET() {
   }
 }
 
+
+// POST 
 export async function POST(req: Request) {
   await connectDB();
 
@@ -37,7 +39,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Missing fields" }, { status: 400 });
     }
 
-    const product = await Product.create({
+    const product = await ProductModel.create({
       productName,
       price: Number(price),
       category,
@@ -54,13 +56,15 @@ export async function POST(req: Request) {
   }
 }
 
+// DELETE 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  {params}:{params: Promise<{ id: string }>}
 ) {
+  const { id } = await params;
   await connectDB();
   try {
-    const deletedProduct = await Product.findByIdAndDelete(params.id);
+    const deletedProduct =await  ProductModel.findByIdAndDelete(id);
     if (!deletedProduct) {
       return NextResponse.json(
         { message: "Product not found" },
@@ -69,10 +73,12 @@ export async function DELETE(
     }
     return NextResponse.json({ message: "Product deleted successfully" });
   } catch (error) {
-    console.error(" Error deleting product:", error);
+    console.error("Error deleting product:", error);
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }
     );
   }
 }
+
+

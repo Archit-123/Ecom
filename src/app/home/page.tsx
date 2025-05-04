@@ -5,8 +5,11 @@ import style from "./Home.module.css";
 import { useDispatch } from "react-redux";
 import { productsRedux } from "../action";
 import type { AppDispatch, RootState } from "../store/Sore";
+import { useParams } from "next/navigation";
 
 export default function Page() {
+  const params = useParams();
+  const id = params?.id as string;
   type Product = {
     _id: string;
     price: number;
@@ -28,7 +31,7 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/products/[id]");
+        const res = await fetch("/api/products");
         const data = await res.json();
         setProducts(data);
       } catch (err) {
@@ -36,7 +39,7 @@ export default function Page() {
       }
     };
     fetchData();
-  });
+  }, [id]);
   console.log(products);
 
   useEffect(() => {

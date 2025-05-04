@@ -1,21 +1,26 @@
+import React from "react";
 import { notFound } from "next/navigation";
 import connectDB from "../../lib/mongoose";
 import ProductModel from "../../models/product";
 
-interface Props {
-  params: { id: string };
-}
 type Product = {
-  _id: string;
   price: number;
   productName: string;
   image: string;
   category: string;
 };
-export default async function ProductPage({ params }: Props) {
+export type PageProps = {
+  params: { id: string };
+};
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   await connectDB();
 
-  const productData = await ProductModel.findById(params.id).lean();
+  const productData = await ProductModel.findById(id).lean();
 
   if (!productData) return notFound();
 
