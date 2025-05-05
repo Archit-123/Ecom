@@ -17,8 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ecom Website",
-  description: "Archit Mallick",
+  title: "Shoplivo",
+  description:
+    "Shoplivo – Affordable Online Shopping for Electronics, Fashion, Home & More",
 };
 
 export default function RootLayout({
