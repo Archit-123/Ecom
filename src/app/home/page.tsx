@@ -40,7 +40,7 @@ export default function Page() {
     };
     fetchData();
   }, [id]);
-  console.log(products);
+  // console.log(products);
 
   useEffect(() => {
     setFilteredProducts(

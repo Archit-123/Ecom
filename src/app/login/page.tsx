@@ -22,15 +22,16 @@ type FormValues = {
 export default function LoginPage() {
   const {
     register,
-    handleSubmit,
+
     formState: { errors },
   } = useForm<FormValues>();
 
   const setUser = useAuthStore((state) => state.setUser);
   const router = useRouter();
 
-  const onSubmit = (data: FormValues) => {
-    console.log("Logging in with:", data);
+  const handleSubmit = () => {
+    // console.log("Logging in with:", data);
+    alert("Login server is down, please try logging with GOOGLE!");
   };
 
   const handleGoogleSignIn = async () => {
@@ -44,7 +45,7 @@ export default function LoginPage() {
         photo: user.photoURL!,
       });
 
-      console.log("Signed in:", user);
+      // console.log("Signed in:", user);
       router.push("/profile");
     } catch (err) {
       console.error("Google Sign-In Error:", err);
@@ -57,7 +58,7 @@ export default function LoginPage() {
         <Typography variant="h4" align="center" gutterBottom>
           Login
         </Typography>
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Box component="form" onSubmit={handleSubmit} noValidate>
           <TextField
             label="Email"
             fullWidth

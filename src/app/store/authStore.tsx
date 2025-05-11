@@ -18,7 +18,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
   setFromFirebase: (firebaseUser) => {
-    console.log("Firebase User:", firebaseUser);
+    // console.log("Firebase User:", firebaseUser);
     set({
       user: {
         name: firebaseUser.displayName ?? "",

@@ -78,8 +78,8 @@ export default function ProductPreferences() {
     );
 
     const data = await res.json();
-    console.log("Uploaded Image to Cloudinary:", data);
-    return data.secure_url; // you can also return data.public_id if you prefer
+    // console.log("Uploaded Image to Cloudinary:", data);
+    return data.secure_url;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,7 +92,7 @@ export default function ProductPreferences() {
 
     try {
       const uploadedImageUrl = await uploadImageToCloudinary(fileInput);
-      console.log("Uploaded URL:", uploadedImageUrl);
+      // console.log("Uploaded URL:", uploadedImageUrl);
 
       const res = await fetch("/api/products/[id]", {
         method: "POST",
@@ -132,9 +132,6 @@ export default function ProductPreferences() {
       const res = await fetch(`/api/products/${id}`, {
         method: "DELETE",
       });
-
-      const data = await res.json();
-      console.log(data);
 
       if (res.ok) {
         alert("Product deleted");
